@@ -2,6 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:noti/features/notes/presentation/bloc/notes_bloc.dart';
 
 import 'features/notes/presentation/widget/notes_page.dart';
 import 'firebase_options.dart';
@@ -28,16 +30,21 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Noti',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        scaffoldBackgroundColor: Colors.yellow.shade50,
-        appBarTheme: AppBarTheme(
-          color: Colors.yellow.shade700
-        )
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (context) => NotesBloc())
+      ],
+      child: MaterialApp(
+        title: 'Noti',
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+          scaffoldBackgroundColor: Colors.yellow.shade50,
+          appBarTheme: AppBarTheme(
+            color: Colors.yellow.shade700
+          )
+        ),
+        home: const NotesPage(),
       ),
-      home: const NotesPage(),
     );
   }
 }
