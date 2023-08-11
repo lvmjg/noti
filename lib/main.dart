@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
           color: Colors.yellow.shade700
         )
       ),
-
+      home: const NotesPage(),
     );
   }
 }
