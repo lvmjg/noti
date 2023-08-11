@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'notes_page.dart';
+import 'features/notes/presentation/widget/notes_page.dart';
 
 void main() {
   runApp(const MyApp());
