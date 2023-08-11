@@ -1,8 +1,23 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 
 import 'features/notes/presentation/widget/notes_page.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
+  FirebaseFirestore ff = FirebaseFirestore.instance;
+  ff.useFirestoreEmulator('127.0.0.1', 8080);
+
+  FirebaseStorage fs = FirebaseStorage.instance;
+  fs.useStorageEmulator('127.0.0.1', 9199);
+
   runApp(const MyApp());
 }
 
