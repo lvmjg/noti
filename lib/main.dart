@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:noti/features/notes/presentation/bloc/notes_bloc.dart';
 
+import 'features/add_note/presentation/bloc/add_note_bloc.dart';
 import 'features/notes/presentation/widget/notes_page.dart';
 import 'firebase_options.dart';
 
@@ -32,7 +33,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (context) => NotesBloc())
+        BlocProvider(create: (context) => NotesBloc()),
+        BlocProvider(create: (context) => AddNoteBloc())
       ],
       child: MaterialApp(
         title: 'Noti',
