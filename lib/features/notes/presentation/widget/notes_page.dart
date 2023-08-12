@@ -1,8 +1,10 @@
 import 'dart:ffi';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 
+import '../bloc/notes_bloc.dart';
 import 'notes_app_bar.dart';
 import 'notes_body.dart';
 import 'notes_floating_action_button.dart';
@@ -24,7 +26,11 @@ class _NotesPageState extends State<NotesPage> {
     );
   }
 
-
+  @override
+  void initState() {
+    super.initState();
+    context.read<NotesBloc>().add(NotesInitiated());
+  }
 }
 
 
