@@ -16,7 +16,7 @@ class AddNotePage extends StatefulWidget {
 class _AddNotePageState extends State<AddNotePage> {
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
         appBar: AddNoteAppBar(),
         body: AddNoteBody());
   }
