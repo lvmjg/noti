@@ -15,13 +15,13 @@ part 'notes_state.dart';
 
 class NotesBloc extends Bloc<NotesEvent, NotesState> {
   NotesBloc() : super(NotesFetchSuccess(notes: const [])) {
-    FetchPlaces fetchPlaces =
-        FetchPlaces(NotesRepositoryImpl(NotesRemoteDataSourceImpl()));
+    FetchNotes fetchNotes =
+        FetchNotes(NotesRepositoryImpl(NotesRemoteDataSourceImpl()));
 
     on<NotesEvent>((event, emit) async {
       emit(NotesFetchInProgress());
 
-      (await fetchPlaces()).fold(
+      (await fetchNotes()).fold(
           (failure) => emit(NotesFetchFailure(errorMessage: errorFetchNotes)),
           (notes) => emit(NotesFetchSuccess(notes: notes)));
     });

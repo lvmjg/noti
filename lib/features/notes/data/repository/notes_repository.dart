@@ -7,7 +7,7 @@ import '../../domain/entity/note.dart';
 import '../datasource/notes_remote_data_source.dart';
 
 abstract class NotesRepository {
-  Future<Either<Failure, List<Note>>> fetchNotes();
+  Future<Either<Failure,List<Note>>> fetchNotes();
 }
 
 class NotesRepositoryImpl implements NotesRepository {
@@ -16,11 +16,11 @@ class NotesRepositoryImpl implements NotesRepository {
   NotesRepositoryImpl(this.remote);
 
   @override
-  Future<Either<Failure, List<Note>>> fetchNotes() async {
-    List<Note> places = [];
+  Future<Either<Failure,List<Note>>> fetchNotes() async {
+    List<Note> notes;
     try {
-      places = await remote.fetchPlaces();
-      return Right(places);
+      notes = await remote.fetchNotes();
+      return Right(notes);
     } on FetchException {
       return Left(FetchFailure());
     }
