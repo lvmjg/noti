@@ -1,5 +1,7 @@
+import 'package:cross_file_image/cross_file_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:noti/features/notes/domain/entity/note.dart';
 
 import '../bloc/notes_bloc.dart';
@@ -19,11 +21,7 @@ class _NotesBodyState extends State<NotesBody> {
       child: BlocBuilder<NotesBloc, NotesState>(
         builder: (context, state) {
           if (state is NotesFetchSuccess) {
-            return GridView.count(
-              crossAxisCount: 2,
-              crossAxisSpacing: 15,
-              children: _createGridviewChildren(state.notes),
-            );
+            return _createGridView(state.notes);
           } else if (state is NotesFetchFailure) {
             return Center(
                 child: ElevatedButton(
@@ -45,7 +43,23 @@ class _NotesBodyState extends State<NotesBody> {
     );
   }
 
-  _createGridviewChildren(List<Note> notes) {
+  _createGridView(List<Note> notes) {
+    if (notes.isNotEmpty) {
+      return RefreshIndicator(
+        onRefresh: () async {
+          context.read<NotesBloc>().add(NotesInitiated());
+        },
+        child: GridView.count(
+          crossAxisCount: 2,
+          children: _createGridviewChildren(notes),
+        ),
+      );
+    } else {
+      return Container();
+    }
+  }
+
+  List<Widget> _createGridviewChildren(List<Note> notes) {
     return notes.map((note) {
       return Card(
           shape: const RoundedRectangleBorder(
@@ -61,12 +75,21 @@ class _NotesBodyState extends State<NotesBody> {
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
                 SizedBox(
-                  height: 8,
+                  height: 16,
                 ),
                 Text('${note.content}'),
+                _showImage(note.image)
               ],
             ),
           ));
     }).toList();
+  }
+
+  Widget _showImage(XFile? xFile) {
+    if (xFile != null) {
+      return Expanded(child: Image(image: XFileImage(xFile)));
+    } else {
+      return Container();
+    }
   }
 }

@@ -59,6 +59,7 @@ class _AddNoteBodyState extends State<AddNoteBody> {
                   Note newNote = Note(
                     title: titleController.text,
                     content: contentController.text,
+                    hasImage: pickedFile!=null
                   );
                   newNote.image = pickedFile;
 
