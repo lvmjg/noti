@@ -24,21 +24,26 @@ class AddNoteRemoteDataSourceImpl implements AddNoteRemoteDataSource{
       noteId = doc.id;
 
       if(note.image!=null){
-        String fileExtension = note.image!.path.split('.').last;
-        String uploadFileName = '$noteId.$fileExtension';
-
-        String documentsPath = (await getApplicationDocumentsDirectory()).path;
-        String localPath = '$documentsPath/$uploadFileName';
-        File newFile = await File(note.image!.path).copy(localPath);
-
-        String storagePath = '$pathNotes/$uploadFileName';
-        await fs.ref(storagePath).putFile(newFile);
+        String originalFilePath = note.image!.path;
+        _processAddingImageToStorage(fs, originalFilePath, noteId);
       }
     } catch(e){
       throw AddException();
     }
 
     return noteId;
+  }
+
+  void _processAddingImageToStorage(FirebaseStorage fs, String originalFilePath, String noteId) async {
+    String fileExtension = originalFilePath.split('.').last;
+    String uploadFileName = '$noteId.$fileExtension';
+
+    String documentsPath = (await getApplicationDocumentsDirectory()).path;
+    String localPath = '$documentsPath/$uploadFileName';
+    File newFile = await File(originalFilePath).copy(localPath);
+
+    String storagePath = '$pathNotes/$uploadFileName';
+    await fs.ref(storagePath).putFile(newFile);
   }
 
 }
