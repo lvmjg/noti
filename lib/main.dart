@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:noti/features/notes/presentation/bloc/notes_bloc.dart';
@@ -16,11 +17,13 @@ Future<void> main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
+  String emulatorAddress = '10.0.2.2';
+
   FirebaseFirestore ff = FirebaseFirestore.instance;
-  ff.useFirestoreEmulator('127.0.0.1', 8080);
+  ff.useFirestoreEmulator(emulatorAddress, 8080);
 
   FirebaseStorage fs = FirebaseStorage.instance;
-  fs.useStorageEmulator('127.0.0.1', 9199);
+  fs.useStorageEmulator(emulatorAddress, 9199);
 
   runApp(const MyApp());
 }
