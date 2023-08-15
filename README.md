@@ -1,16 +1,12 @@
 # noti
 
-A new Flutter project.
+Simple app for adding notes (still in progress).
 
-## Getting Started
+## About
 
-This project is a starting point for a Flutter application.
+Libraries used: BLoC, Firebase Firestore, Firebase Storage.
 
-A few resources to get you started if this is your first Flutter project:
+![12](https://github.com/lvmjg/noti/assets/63665194/a510d93f-d687-4d16-89ec-12145f01d2be)
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+![11](https://github.com/lvmjg/noti/assets/63665194/94ed82dc-c2fb-43f7-855f-e8c65a182518)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
